@@ -1,0 +1,20 @@
+{
+  "name": "generator-helix",
+  "version": "1.0.0",
+  "description": "yeoman generator for Helix style Sitecore projects",
+  "files": [
+    "generators"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sitecore",
+    "helix",
+    "generator",
+    "yeoman"
+  ],
+  "author": "Emil Klein <eok@pentia.dk>",
+  "license": "ISC"
+}
