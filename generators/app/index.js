@@ -87,7 +87,11 @@ module.exports = class extends yeoman {
     writing() {
             mkdir.sync('Project');
             mkdir.sync('Feature');
-            mkdir.sync('Foundation')
+            mkdir.sync('Foundation');
+
+            this.fs.copy(this.templatePath('Project/Project-layer.md'),this.destinationPath("Project/Project-layer.md"));
+            this.fs.copy(this.templatePath('Feature/Feature-layer.md'),this.destinationPath("Feature/Feature-layer.md"));
+            this.fs.copy(this.templatePath('Foundation/Foundation-layer.md'),this.destinationPath("Foundation/Foundation-layer.md"));
         }
 };
 
