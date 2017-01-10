@@ -1,19 +1,21 @@
 var yeoman = require('yeoman-generator');
 var mkdir = require('mkdirp');
-var HelixGenerator = yeoman.generators.Base.extend({
+var yosay = require('yosay');
 
-    constructor: function() {
-        yeoman.generators.Base.apply(this, arguments);
+module.exports = class extends yeoman {
 
-        this.argument('solutionName', { type: String, required: false, desc: 'the name of the Helix solution' });
-    },
+    constructor(args, opts) {
+        super(args, opts);
 
-    init: function() {
+        this.option('solutionName', { type: String, required: false, desc: 'the name of the Helix solution' });
+    }
+
+    init() {
         this.log(yosay('Welcome to the kickass Helix generator!'));
         this.templatedata = {};
-    },
+    }
 
-    askForSolutionType: function() {
+    askForSolutionType() {
         var done = this.async();
 
         var questions = [{
@@ -30,15 +32,38 @@ var HelixGenerator = yeoman.generators.Base.extend({
             }]
         }];
 
-        this.prompt(questions, function (props) {
-        this.type = props.type;
-        done();
+        this.prompt(questions).then(function(answers) {
+            this.props = answers;
         }.bind(this));
-    },
+    }
 
-    prompting: function() {
+    _promptQuestions(questions) {
         var done = this.async();
+        this.prompt(questions).then(function(answers) {
+            this.props = answers;
+            done();
+        }.bind(this));
+    }
 
+    askForSolutionType() {
+        var questions = [{
+        type: 'list',
+        name: 'type',
+        message: 'What type of solution do you want to create?',
+        choices: [
+            {
+            name: 'Empty Helix solution',
+            value: 'emptyhelix'
+            }, {
+            name: 'Helix solution with Pentia tools',
+            value: 'pentiahelix'
+            }]
+        }];
+
+        this._promptQuestions(questions);
+    }
+
+    askForSolutionSettings() {
         var questions = [{
                 type: 'input',
                 name: 'SolutionName',
@@ -53,31 +78,16 @@ var HelixGenerator = yeoman.generators.Base.extend({
             {
                 type: 'confirm',
                 name: 'packagejson',
-                message: 'would you like me to setup your package.json for you?'
+                message: 'Would you like me to setup your package.json for you?'
             }];
 
-        this.prompt(questions).then(function(answers) {
-            this.props = answers;
-            this.log('Solution name: ' + answers.SolutionName);
-            this.log('Serialization enabled: ' + answers.serialization);
-            this.log('Package.json setup by generator: ' + answers.packagejson);           
-            done();
-        }.bind(this));
-    },
+        this._promptQuestions(questions);
+    }
 
-    writing: {
-        config: function () {
-            this.fs.copyTpl(
-                this.templatePath('_package.nuspec'),
-                this.destinationPath(this.props.projectname + '.nuspec'), {
-                    version: this.props.version,
-                    destinationRoot: this.destinationRoot(),
-                    authors: this.props.authors,
-                    id: this.props.id
-                }
-            );
-            mkdir.sync('website');
-            mkdir.sync('data')
-        },
-    },
-});
+    writing() {
+            mkdir.sync('Project');
+            mkdir.sync('Feature');
+            mkdir.sync('Foundation')
+        }
+};
+
