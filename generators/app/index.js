@@ -85,13 +85,14 @@ module.exports = class extends yeoman {
     }
 
     writing() {
-            mkdir.sync('Project');
-            mkdir.sync('Feature');
-            mkdir.sync('Foundation');
+            var layers = [ 'Project', 'Feature', 'Foundation'];
 
-            this.fs.copy(this.templatePath('Project/Project-layer.md'),this.destinationPath("Project/Project-layer.md"));
-            this.fs.copy(this.templatePath('Feature/Feature-layer.md'),this.destinationPath("Feature/Feature-layer.md"));
-            this.fs.copy(this.templatePath('Foundation/Foundation-layer.md'),this.destinationPath("Foundation/Foundation-layer.md"));
+            for(var i = 0; i < layers.length; i++) {
+                var layer = layers[i];
+                mkdir.sync(layer);
+                var layerDocumentationPath = layer + '/' + layer + '-layer.md'
+                this.fs.copy(this.templatePath(layerDocumentationPath),this.destinationPath(layerDocumentationPath));
+            }
         }
 };
 
