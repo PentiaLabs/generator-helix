@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "yeoman-generator",
     "sitecore",
     "helix",
     "generator",
@@ -26,7 +27,8 @@
   "author": "Emil Klein <eok@pentia.dk>",
   "license": "ISC",
   "dependencies": {
-    "yeoman-generator": "^0.24.1"
+    "yeoman-generator": "1.0.1",
+    "mkdirp": "0.5.1"
   },
   "files": [
     "generators"
