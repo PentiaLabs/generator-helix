@@ -1,26 +1,20 @@
 {
-  "name": "bane.website",
+  "name": "<%= solution.name %>",
   "version": "1.0.0",
-  "description": "Bane.Website",
+  "description": "Helix solution <%= solution.name %>",
   "main": "gulpfile.js",
   "dependencies": {
     "frontend-builder": "3.3.5",
-    "@pentia/publish-projects": "0.1.10",
+    "@pentia/publish-projects": "0.1.12",
     "@pentia/sitecore-package-manager": "0.1.9",
     "@pentia/configuration-transformer": "0.1.8",
-    "@pentia/watch-publish-projects": "0.1.0",
-    "gulp": "^3.9.0",
-    "run-sequence": "^1.1.4"
+    "@pentia/watch-publish-projects": "0.1.1",
+    "gulp": "3.9.5",
+    "run-sequence": "3.9.5"
   },
   "devDependencies": { },
   "scripts": {
     "frontend": "frontend-builder"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://pentia.visualstudio.com/DefaultCollection/_git/Bane.Website"
-  },
-  "author": "Pentia A/S",
-
-  "homepage": "https://pentia.visualstudio.com/Bane.Website/_home"
+  "author": "<%= solution.author %>"
 }
