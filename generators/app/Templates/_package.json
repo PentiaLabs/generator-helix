@@ -1,7 +1,7 @@
 {
-  "name": "<%= solution.name %>",
+  "name": "<%= solutionname %>",
   "version": "1.0.0",
-  "description": "Helix solution <%= solution.name %>",
+  "description": "Helix solution <%= solutionname %>",
   "main": "gulpfile.js",
   "dependencies": {
     "frontend-builder": "3.3.5",
@@ -16,5 +16,5 @@
   "scripts": {
     "frontend": "frontend-builder"
   },
-  "author": "<%= solution.author %>"
+  "author": "<%= solutionname %>"
 }
