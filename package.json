@@ -29,7 +29,8 @@
   "dependencies": {
     "yeoman-generator": "1.0.1",
     "mkdirp": "0.5.1",
-    "yosay": "1.2.1"
+    "yosay": "1.2.1",
+    "uuid": "3.0.1"
   },
   "files": [
     "generators"
