@@ -71,6 +71,10 @@ module.exports = class extends yeoman {
     _buildTemplateData() {
         this.templatedata.solutionname = this.settings.SolutionName;
         this.templatedata.environmentguid = guid.v4();
+        this.templatedata.projectguid = guid.v4();
+        this.templatedata.featureguid = guid.v4();
+        this.templatedata.foundationguid = guid.v4();
+        this.templatedata.testguid = guid.v4();
     }
 
 
