@@ -2,35 +2,49 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "<%= projectguid %>"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Project", "1. Project", "{<%= projectguid %>}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature", "Feature", "<%= featureguid %>"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Feature", "2. Feature", "{<%= featureguid %>}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "<%= foundationguid %>"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Foundation", "3. Foundation", "{<%= foundationguid %>}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "<%= testguid %>"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{<%= testguid %>}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environment", "Project\Environment\Environment.csproj", "<%= environmentguid %>"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environment", "Project\Environment\Environment.csproj", "{<%= environmentguid %>}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
 		always|Any CPU = always|Any CPU
 		always|x64 = always|x64
 		ci|Any CPU = ci|Any CPU
 		ci|x64 = ci|x64
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		<%= environmentguid %>.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		<%= environmentguid %>.Debug|Any CPU.Build.0 = Debug|Any CPU
-		<%= environmentguid %>.Release|Any CPU.ActiveCfg = Release|Any CPU
-		<%= environmentguid %>.Release|Any CPU.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.always|Any CPU.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.always|Any CPU.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.always|x64.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.always|x64.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.ci|Any CPU.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.ci|Any CPU.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.ci|x64.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.ci|x64.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{<%= environmentguid %>}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{<%= environmentguid %>}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{<%= environmentguid %>}.Debug|x64.Build.0 = Debug|Any CPU
+		{<%= environmentguid %>}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.Release|Any CPU.Build.0 = Release|Any CPU
+		{<%= environmentguid %>}.Release|x64.ActiveCfg = Release|Any CPU
+		{<%= environmentguid %>}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(NestedProjects) = preSolution
-		<%= environmentguid %> = <%= projectguid %>
+	GlobalSection(NestedProjects) = preSolution
+		{<%= environmentguid %>} = {<%= projectguid %>}
 	EndGlobalSection
 EndGlobal
