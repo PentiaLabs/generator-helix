@@ -1,11 +1,11 @@
 Function Get-ProjectPath {
     [CmdletBinding()]
-    Param(    
+    Param(
     [Parameter(Mandatory=$true)]
     [string]$name,
     [Parameter(Mandatory=$true)]
     [string]$type)
 
-    "$type\$name\$name.csproj"
+    "$type\$name\code\$name.csproj"
 }
 

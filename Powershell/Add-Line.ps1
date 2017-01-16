@@ -18,5 +18,5 @@ Function Add-Line {
             $FileModified += $LinesToAdd   
         } 
     }
-    Set-Content $fileName $FileModified
+    Set-Content $fileName $FileModified -Force
 }
