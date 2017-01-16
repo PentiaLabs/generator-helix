@@ -19,8 +19,8 @@ Function Get-ProjectConfigurationPlatformSection {
             $buildInherit = "Release|Any CPU";
         }
 
-        $lines.Add("`t{$Id}.$fullName.ActiveCfg = $buildInherit") | Out-Null
-        $lines.Add("`t{$Id}.$fullName.Build.0 = $buildInherit")   | Out-Null
+        $lines.Add("`t`t{$Id}.$fullName.ActiveCfg = $buildInherit") | Out-Null
+        $lines.Add("`t`t{$Id}.$fullName.Build.0 = $buildInherit")   | Out-Null
     }
 
     Write-Output $lines
