@@ -16,6 +16,7 @@ module.exports = class extends yeoman {
     init() {
         this.log(yosay('Lets generate that project!'));
         this.templatedata = {};
+        this.sourceRoot(path.join(this._sourceRoot,"../../Templates"))
     }
 
     askForProjectSettings() {
