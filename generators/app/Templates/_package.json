@@ -10,7 +10,7 @@
     "@pentia/configuration-transformer": "0.1.8",
     "@pentia/watch-publish-projects": "0.1.1",
     "gulp": "3.9.5",
-    "run-sequence": "3.9.5"
+    "run-sequence": "1.2.2"
   },
   "devDependencies": { },
   "scripts": {
