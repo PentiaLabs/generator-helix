@@ -2,6 +2,7 @@ var yeoman = require('yeoman-generator');
 var mkdir = require('mkdirp');
 var yosay = require('yosay');
 var guid = require('uuid');
+var path = require('path');
 
 module.exports = class extends yeoman {
 
@@ -14,10 +15,6 @@ module.exports = class extends yeoman {
     init() {
         this.log(yosay('Welcome to the kickass Helix generator!'));
         this.templatedata = {};
-    }
-
-    _promptQuestions(questions) {
-
     }
 
     askForSolutionType() {
@@ -58,6 +55,11 @@ module.exports = class extends yeoman {
                 type: 'confirm',
                 name: 'packagejson',
                 message: 'Would you like me to setup your package.json for you?'
+            },{
+                type:'input',
+                name:'sourceFolder',
+                message:'Source code folder name', 
+                default: 'src'
             }];
 
         var done = this.async();
@@ -75,34 +77,42 @@ module.exports = class extends yeoman {
         this.templatedata.featureguid = guid.v4();
         this.templatedata.foundationguid = guid.v4();
         this.templatedata.testguid = guid.v4();
+        this.templatedata.sourceFolder = this.settings.sourceFolder;
     }
 
 
     _writeLayers() {
         var layers = [ 'Project', 'Feature', 'Foundation'];
-
+            
             for(var i = 0; i < layers.length; i++) {
+                
+                var destinationDirectory = path.join(this.settings.sourceFolder,layers[i]);
+                mkdir.sync(destinationDirectory);
+
                 var layer = layers[i];
-                mkdir.sync(layer);
-                var layerDocumentationPath = layer + '/' + layer + '-layer.md'
-                this.fs.copy(this.templatePath(layerDocumentationPath),this.destinationPath(layerDocumentationPath));
+                var layerDocumentationFileName = layer + '/' + layer + '-layer.md';
+                var destinationFileName = path.join(this.destinationPath(destinationDirectory), layer + '-layer.md');
+                this.fs.copy(this.templatePath(layerDocumentationFileName),this.destinationPath(destinationFileName));
             }
     }
 
     _copySolutionItems() {
-        mkdir.sync("Project/Environment/Properties");
+        mkdir.sync(path.join(this.settings.sourceFolder,"Project/Environment/Properties"));
+
         this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath("gulpfile.js"));
-        this.fs.copy(this.templatePath('Project/Environment/web.config'), this.destinationPath("Project/Environment/web.config"));
-        this.fs.copy(this.templatePath('Project/Environment/packages.config'), this.destinationPath("Project/Environment/packages.config"));
-        this.fs.copy(this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'), this.destinationPath("Project/Environment/Properties/AssemblyInfo.cs"));
+
+        var environmentDestination = path.join(this.settings.sourceFolder,"Project/Environment");
+
+        this.fs.copy(this.templatePath('Project/Environment/web.config'), this.destinationPath(path.join(environmentDestination,'web.config')));
+        this.fs.copy(this.templatePath('Project/Environment/packages.config'), this.destinationPath(path.join(environmentDestination,'packages.config')));
+        this.fs.copy(this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'), this.destinationPath(path.join(environmentDestination,'Properties/AssemblyInfo.cs')));
         this.fs.copyTpl(this.templatePath('_solution.sln'), this.destinationPath(this.settings.SolutionName + ".sln"), this.templatedata);
         this.fs.copyTpl(this.templatePath('_package.json'), this.destinationPath("package.json"), this.templatedata);
-        this.fs.copyTpl(this.templatePath('Project/Environment/Environment.csproj'), this.destinationPath("Project/Environment/Environment.csproj"), this.templatedata);
+        this.fs.copyTpl(this.templatePath('Project/Environment/Project.Environment.csproj'), this.destinationPath(path.join(environmentDestination,'Project.Environment.csproj')), this.templatedata);
     }
 
     writing() {
             this._writeLayers();
-            console.log(this.type);
             switch(this.type)
             {
                 case 'emptyhelix':

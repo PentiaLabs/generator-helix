@@ -11,6 +11,6 @@ Function Get-SolutionFolderId {
     $msbuildPath = Get-MSBuildPath
     Add-Type -Path "$msbuildPath\Microsoft.Build.dll"
     $solution = [Microsoft.Build.Construction.SolutionFile]::Parse($SolutionFile)
-    $solution.ProjectsInOrder | where-object {$_.ProjectName -like "*$type*"} | Select-Object -ExpandProperty ProjectGuid
+    $solution.ProjectsInOrder| where-object {$_.ProjectType -eq [Microsoft.Build.Construction.SolutionProjectType]::SolutionFolder } | where-object {$_.ProjectName -like "*$type*"} | Select-Object -ExpandProperty ProjectGuid
 }
 

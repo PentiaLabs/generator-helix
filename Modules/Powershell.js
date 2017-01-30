@@ -1,5 +1,6 @@
 /*jslint node: true */
 "use strict";
+var yeoman = require('yeoman-generator');
 
 function Powershell () {
 }
