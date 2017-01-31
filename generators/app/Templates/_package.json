@@ -1,0 +1,20 @@
+{
+  "name": "<%= solutionname %>",
+  "version": "1.0.0",
+  "description": "Helix solution <%= solutionname %>",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "frontend-builder": "3.3.5",
+    "@pentia/publish-projects": "0.1.12",
+    "@pentia/sitecore-package-manager": "0.1.9",
+    "@pentia/configuration-transformer": "0.1.8",
+    "@pentia/watch-publish-projects": "0.1.1",
+    "gulp": "3.9.5",
+    "run-sequence": "1.2.2"
+  },
+  "devDependencies": { },
+  "scripts": {
+    "frontend": "frontend-builder"
+  },
+  "author": "<%= solutionname %>"
+}
