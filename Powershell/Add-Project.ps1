@@ -7,7 +7,9 @@ param(
 [Parameter(Mandatory=$true)]
 [string]$Name,
 [Parameter(Mandatory=$true)]
-[string]$ProjectPath)
+[string]$ProjectPath,
+[Parameter(Mandatory=$true)]
+[string]$SolutionFolderName)
 
 . $PSScriptRoot\Add-Line.ps1
 . $PSScriptRoot\Get-SolutionConfigurations.ps1
@@ -25,12 +27,19 @@ $GuidSection = "GlobalSection(ProjectConfigurationPlatforms) = postSolution"
 $ProjectSection = "MinimumVisualStudioVersion = 10.0.40219.1"
 $NestedProjectSection = "GlobalSection(NestedProjects) = preSolution"
 $projectGuid = [guid]::NewGuid();
+$projectFolderGuid = [guid]::NewGuid();
 
 $addProjectSection = @("Project(`"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}`") = `"$Name`", `"$projectPath`", `"{$projectGuid}`"","EndProject")
-$addNestProjectSection = @("`t`t{$projectGuid} = $solutionFolderId")
+$addProjectSolutionFolder = @("Project(`"{2150E333-8FDC-42A3-9474-1A3956D46DE8}`") = `"$SolutionFolderName`", `"$SolutionFolderName`", `"{$projectFolderGuid}`"","EndProject")
+
+$addNestProjectSection = @("`t`t{$projectGuid} = {$projectFolderGuid}")
+$addNestProjectSolutionFolderSection = @("`t`t{$projectFolderGuid} = $solutionFolderId")
 
 Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSection
+Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSolutionFolder
 Add-Line -FileName $SolutionFile -Pattern $NestedProjectSection -LinesToAdd $addNestProjectSection
+Add-Line -FileName $SolutionFile -Pattern $NestedProjectSection -LinesToAdd $addNestProjectSolutionFolderSection
+
 Add-Line -FileName $SolutionFile -Pattern $GuidSection -LinesToAdd (Get-ProjectConfigurationPlatformSection -Id $projectGuid -Configurations $configurations)
 
 #Setting LastWriteTime to tell VS 2015 that solution has changed.

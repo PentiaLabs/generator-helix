@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Foundation", "3. Foundat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{<%= testguid %>}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{<%= environmentfolderguid %>}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environment", "<%= sourceFolder %>\Project\Environment\Project.Environment.csproj", "{<%= environmentguid %>}"
 EndProject
 Global
@@ -45,6 +47,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{<%= environmentguid %>} = {<%= projectguid %>}
+		{<%= environmentfolderguid %>} = {<%= projectguid %>}
+		{<%= environmentguid %>} = {<%= environmentfolderguid %>}
 	EndGlobalSection
 EndGlobal
