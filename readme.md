@@ -6,7 +6,7 @@ This generator will create a Helix compliant solution and provide the ability to
 
 You need Yeoman (See [here](http://yeoman.io/)) . Yo and the generators used are installed using [npm]( https://www.npmjs.com/).
 
-First thing is to install Yo usng nopm.
+First thing is to install Yo using npm.
 
 > npm install -g yo
 
