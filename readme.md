@@ -16,11 +16,13 @@ Then you have to install the helix generator.
 
 ## How to create a solution
 
-To create a Helix solution run the following command, and answer the questions.
+To create a Helix solution run the following command in an empty root folder where you want the solution to be created, and answer the questions.
 
 > yo helix
 
-## How to create a new project and addd it to a given layer
+## How to create a new project and add it to a given layer
+
+To add a new project to an existing run the following command in the root directory, that contains the VS solution file.
 
 > yo helix:add
 
