@@ -12,7 +12,7 @@ First thing is to install Yo usng nopm.
 
 Then you have to install the helix generator.
 
-> install generator-helix -g
+> npm install generator-helix -g
 
 ## How to create a solution
 
