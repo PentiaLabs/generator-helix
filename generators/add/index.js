@@ -70,8 +70,33 @@ module.exports = class extends yeoman {
         var done = this.async();
         this.prompt(questions).then(function(answers) {
             this.layer = answers.layer;
-            this._buildTemplateData();
             this.settings.LayerPrefixedProjectName = this.layer + '.' + this.settings.ProjectName;
+            done();
+        }.bind(this));
+    }
+
+      askTargetFrameworkVersion() {
+        var questions = [{
+        type: 'list',
+        name: 'target',
+        message: 'Choose target .net framework version?',
+        choices: [
+            {
+            name: '.net 4.6.1',
+            value: 'v4.6.1'
+            }, {
+            name: '.net 4.6',
+            value: 'v4.6'
+            }, {
+            name: '.net 4.5.2',
+            value: 'v4.5.2'
+            }]
+        }];
+
+        var done = this.async();
+        this.prompt(questions).then(function(answers) {
+            this.target = answers.target;
+            this._buildTemplateData();
             done();
         }.bind(this));
     }
@@ -81,6 +106,7 @@ module.exports = class extends yeoman {
         this.templatedata.projectname = this.settings.ProjectName;
         this.templatedata.projectguid = guid.v4();
         this.templatedata.layer = this.layer;
+        this.templatedata.target = this.target;
     }
 
     _copyProjectItems() {
