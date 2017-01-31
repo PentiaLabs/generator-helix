@@ -10,15 +10,16 @@ module.exports = class extends yeoman {
 
     constructor(args, opts) {
         super(args, opts);
-        this.argument('ProjectName', { type: String, required: false, desc: 'name of the project' });
+        this.argument('ProjectName', { type: String, required: false, desc: 'Name of the project' });
     }
 
     init() {
         this.log(yosay('Lets generate that project!'));
         this.templatedata = {};
-        this.templatedata.layer = "Foundation";
         this.sourceRoot(path.join(this._sourceRoot,"../../Templates"))
     }
+
+ 
 
     askForProjectSettings() {
         var questions = [{
@@ -44,8 +45,33 @@ module.exports = class extends yeoman {
         this.prompt(questions).then(function(answers) {
             this.settings = answers;
             this.settings.ProjectName = this.settings.ProjectName;
-            this.settings.LayerPrefixedProjectName = this.templatedata.layer + '.' + this.settings.ProjectName;
+            done();
+        }.bind(this));
+    }
+
+   askForLayer() {
+        var questions = [{
+        type: 'list',
+        name: 'layer',
+        message: 'What layer do you want to add the project too?',
+        choices: [
+            {
+            name: 'Feature layer?',
+            value: 'Feature'
+            }, {
+            name: 'Foundation layer?',
+            value: 'Foundation'
+            }, {
+            name: 'Project layer?',
+            value: 'Project'
+            }]
+        }];
+
+        var done = this.async();
+        this.prompt(questions).then(function(answers) {
+            this.layer = answers.layer;
             this._buildTemplateData();
+            this.settings.LayerPrefixedProjectName = this.layer + '.' + this.settings.ProjectName;
             done();
         }.bind(this));
     }
@@ -54,6 +80,7 @@ module.exports = class extends yeoman {
         this.templatedata.layerprefixedprojectname = this.settings.LayerPrefixedProjectName;
         this.templatedata.projectname = this.settings.ProjectName;
         this.templatedata.projectguid = guid.v4();
+        this.templatedata.layer = this.layer;
     }
 
     _copyProjectItems() {
@@ -64,13 +91,13 @@ module.exports = class extends yeoman {
     }
 
     _copySerializationItems() {
-        mkdir.sync(path.join(this.settings.sourceFolder, this.templatedata.layer, this.settings.ProjectName, 'serialization' ));
+        mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
         var serializationDestinationFile = path.join(this.settings.ProjectPath, 'App_Config/Include', this.settings.LayerPrefixedProjectName, 'serialization.config');
         this.fs.copyTpl(this.templatePath('_serialization.config'), this.destinationPath(serializationDestinationFile), this.templatedata);
     }
 
     writing() {
-          this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.templatedata.layer, this.settings.ProjectName, 'code' );
+          this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'code' );
           this._copyProjectItems() 
 
            if(this.settings.serialization)
@@ -80,7 +107,7 @@ module.exports = class extends yeoman {
 
            const files = fs.readdirSync( this.destinationPath())
            const SolutionFile = files.find(file => file.indexOf('.sln') > -1)
-           const scriptParameters = "-SolutionFile '" + this.destinationPath(SolutionFile) + "' -Name " + this.settings.LayerPrefixedProjectName + " -Type " + this.templatedata.layer + " -ProjectPath '" + this.settings.ProjectPath + "'";
+           const scriptParameters = "-SolutionFile '" + this.destinationPath(SolutionFile) + "' -Name " + this.settings.LayerPrefixedProjectName + " -Type " + this.layer + " -ProjectPath '" + this.settings.ProjectPath + "'";
 
            powershell.runAsync(path.join(this._sourceRoot, "../../powershell/add-project.ps1"), scriptParameters)
         }
