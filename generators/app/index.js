@@ -65,10 +65,36 @@ module.exports = class extends yeoman {
         var done = this.async();
         this.prompt(questions).then(function(answers) {
             this.settings = answers;
+            done();
+        }.bind(this));
+    }
+
+    askTargetFrameworkVersion() {
+        var questions = [{
+        type: 'list',
+        name: 'target',
+        message: 'Choose target .net framework version?',
+        choices: [
+            {
+            name: '.net 4.6.1',
+            value: 'v4.6.1'
+            }, {
+            name: '.net 4.6',
+            value: 'v4.6'
+            }, {
+            name: '.net 4.5.2',
+            value: 'v4.5.2'
+            }]
+        }];
+
+        var done = this.async();
+        this.prompt(questions).then(function(answers) {
+            this.target = answers.target;
             this._buildTemplateData();
             done();
         }.bind(this));
     }
+
 
     _buildTemplateData() {
         this.templatedata.solutionname = this.settings.SolutionName;
@@ -78,6 +104,7 @@ module.exports = class extends yeoman {
         this.templatedata.foundationguid = guid.v4();
         this.templatedata.testguid = guid.v4();
         this.templatedata.sourceFolder = this.settings.sourceFolder;
+        this.templatedata.target = this.target;
     }
 
 
