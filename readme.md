@@ -23,7 +23,8 @@ To create a Helix solution run the following command in an empty root folder whe
 ## How to create a new project and add it to a given layer
 
 To add a new project to an existing run the following command in the root directory, that contains the VS solution file.
+You can call with the Project Name, if you do not you will be prompted to enter it.
 
-> yo helix:add
+> yo helix:add [ProjectName]
 
 
