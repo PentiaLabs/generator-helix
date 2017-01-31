@@ -1,0 +1,29 @@
+{
+	"env": {
+		"node": true
+	},
+	"globals": {
+	},
+	"extends": "eslint:recommended",
+	"rules": {
+		"indent": [
+			"warn",
+			"tab"
+		],
+		"quotes": [
+			"warn",
+			"single"
+		],
+		"semi": [
+			"warn",
+			"always"
+		],
+		"no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"args": "after-used"
+			}
+		]
+	}
+}
