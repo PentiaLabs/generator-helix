@@ -4,6 +4,7 @@ This generator will create a Helix compliant solution and provide the ability to
 
 ## Prerequisites:
 NPM 3.x or newer(see installed version by running "npm -v" in PowerShell)
+
 NODE 6.x or newer (see installed version by running "node -v" in PowerShell)
 
 ## Getting started
