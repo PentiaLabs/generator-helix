@@ -2,6 +2,10 @@
 
 This generator will create a Helix compliant solution and provide the ability to create & add new projects to any layer (i.e. Feature, Foundation & Project). Unicorn is used for serialization, if you don't use serialization and or TDS you have the option not to add serialization to the project. 
 
+## Prerequisites:
+NPM 3.x or newer(see installed version by running "npm -v" in PowerShell)
+NODE 6.x or newer (see installed version by running "node -v" in PowerShell)
+
 ## Getting started
 
 You need Yeoman (See [here](http://yeoman.io/)) . Yo and the generators used are installed using [npm]( https://www.npmjs.com/).
