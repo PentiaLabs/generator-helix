@@ -134,7 +134,7 @@ module.exports = class extends yeoman {
     _copySolutionItems() {
         mkdir.sync(path.join(this.settings.sourceFolder,"Project/Environment/Properties"));
 
-        this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath("gulpfile.js"));
+        this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath('gulpfile.js'));
 
         var environmentDestination = path.join(this.settings.sourceFolder,"Project/Environment");
 

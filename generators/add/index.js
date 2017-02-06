@@ -29,8 +29,9 @@ module.exports = class extends yeoman {
             {
                 type: 'confirm',
                 name: 'serialization',
-                message: 'Would you like to include serialization?',
-                store   : true
+                message: 'Would you like to include Unicorn (serialization)?',
+                store   : true,
+                default : true
             },
             {
                 type:'input',
@@ -109,7 +110,14 @@ module.exports = class extends yeoman {
 
     _copyProjectItems() {
         mkdir.sync(this.settings.ProjectPath);
-        this.fs.copyTpl(this.templatePath('_project.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        if(this.settings.serialization)
+        {
+            this.fs.copyTpl(this.templatePath('_project.unicorn.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        }
+        else
+        {
+            this.fs.copyTpl(this.templatePath('_project.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        }
         this.fs.copyTpl(this.templatePath('Properties/AssemblyInfo.cs'), this.destinationPath(path.join(this.settings.ProjectPath, '/Properties/AssemblyInfo.cs')), this.templatedata);
         
         //if we have publishsettings.targets, then copy in PublishProfiles/local.pubxml
