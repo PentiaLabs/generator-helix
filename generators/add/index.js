@@ -5,6 +5,7 @@ var guid = require('uuid');
 var powershell = require("../../modules/powershell");
 var fs = require("fs");
 var path = require("path");
+var chalk = require('chalk'); 
 
 module.exports = class extends yeoman {
 
@@ -111,13 +112,20 @@ module.exports = class extends yeoman {
         this.fs.copyTpl(this.templatePath('_project.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
         this.fs.copyTpl(this.templatePath('Properties/AssemblyInfo.cs'), this.destinationPath(path.join(this.settings.ProjectPath, '/Properties/AssemblyInfo.cs')), this.templatedata);
         
-    }
+        //if we have publishsettings.targets, then copy in PublishProfiles/local.pubxml
+        fs.access(this.destinationPath('publishsettings.targets'), fs.constants.R_OK, (err) => {
+            if(err==null)
+            {
+                this.fs.copyTpl(this.templatePath('Properties/PublishProfiles/local.pubxml'), this.destinationPath(path.join(this.settings.ProjectPath, 'Properties/PublishProfiles/local.pubxml')), this.templatedata);
+            }
+        });
+   }
 
     _copySerializationItems() {
         mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
         var serializationDestinationFile = path.join(this.settings.ProjectPath, 'App_Config/Include', this.settings.LayerPrefixedProjectName, 'serialization.config');
         this.fs.copyTpl(this.templatePath('_serialization.config'), this.destinationPath(serializationDestinationFile), this.templatedata);
-    }
+     }
 
     writing() {
           this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'code' );
