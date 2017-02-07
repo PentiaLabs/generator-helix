@@ -30,7 +30,6 @@ module.exports = class extends yeoman {
                 type: 'confirm',
                 name: 'serialization',
                 message: 'Would you like to include Unicorn (serialization)?',
-                store   : true,
                 default : true
             },
             {
