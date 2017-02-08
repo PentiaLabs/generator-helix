@@ -8,7 +8,7 @@ function Powershell () {
 Powershell.prototype.runAsync = function (pathToScriptFile, parameters) {
   console.log("Powershell - running: " + pathToScriptFile + " " + parameters);
   var spawn = require("child_process").spawn;
-  var child = spawn("powershell.exe", [pathToScriptFile, parameters]);
+  var child = spawn("powershell.exe", [pathToScriptFile.replace(/ /g,'` '), parameters]);
 
   child.stdout.setEncoding('utf8');
   child.stderr.setEncoding('utf8');
