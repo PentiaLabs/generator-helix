@@ -16,6 +16,7 @@ param(
 . $PSScriptRoot\Get-SolutionFolderId.ps1
 . $PSScriptRoot\Get-ProjectPath.ps1 
 . $PSScriptRoot\Get-ProjectConfigurationPlatformSection.ps1
+. $PSScriptRoot\Add-BuildConfigurations.ps1
 
 Write-Host "adding project $Name"
 
@@ -35,6 +36,7 @@ $addProjectSolutionFolder = @("Project(`"{2150E333-8FDC-42A3-9474-1A3956D46DE8}`
 $addNestProjectSection = @("`t`t{$projectGuid} = {$projectFolderGuid}")
 $addNestProjectSolutionFolderSection = @("`t`t{$projectFolderGuid} = $solutionFolderId")
 
+Add-BuildConfigurations -ProjectPath $projectPath -Configurations $configurations                
 Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSection
 Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSolutionFolder
 Add-Line -FileName $SolutionFile -Pattern $NestedProjectSection -LinesToAdd $addNestProjectSection
