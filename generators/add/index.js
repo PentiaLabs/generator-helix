@@ -23,7 +23,7 @@ module.exports = class extends yeoman {
         var questions = [{
                 type: 'input',
                 name: 'ProjectName',
-                message: 'Name of your project',
+                message: 'Name of your project.'+chalk.blue(" (Excluding layer prefix)"),
                 default: this.options.ProjectName
             },
             {
