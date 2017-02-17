@@ -1,29 +1,36 @@
 {
-	"env": {
-		"node": true
-	},
-	"globals": {
-	},
-	"extends": "eslint:recommended",
-	"rules": {
-		"indent": [
-			"warn",
-			"tab"
-		],
-		"quotes": [
-			"warn",
-			"single"
-		],
-		"semi": [
-			"warn",
-			"always"
-		],
-		"no-unused-vars": [
-			"warn",
-			{
-				"vars": "all",
-				"args": "after-used"
-			}
-		]
-	}
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "node": true
+    },
+    "globals": {
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": [
+            "warn",
+            "tab"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "warn",
+            "always"
+        ],
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used"
+            }
+        ]
+    }
 }
