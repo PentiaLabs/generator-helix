@@ -5,6 +5,7 @@ var guid = require('uuid');
 var powershell = require("../../modules/powershell");
 var fs = require("fs");
 var path = require("path");
+var chalk = require('chalk'); 
 
 module.exports = class extends yeoman {
 
@@ -16,23 +17,20 @@ module.exports = class extends yeoman {
     init() {
         this.log(yosay('Lets generate that project!'));
         this.templatedata = {};
-        this.sourceRoot(path.join(this._sourceRoot,"../../Templates"))
     }
-
- 
 
     askForProjectSettings() {
         var questions = [{
                 type: 'input',
                 name: 'ProjectName',
-                message: 'Name of your project',
+                message: 'Name of your project.'+chalk.blue(" (Excluding layer prefix)"),
                 default: this.options.ProjectName
             },
             {
                 type: 'confirm',
                 name: 'serialization',
-                message: 'Would you like to include serialization?',
-                store   : true
+                message: 'Would you like to include Unicorn (serialization)?',
+                default : true
             },
             {
                 type:'input',
@@ -111,16 +109,30 @@ module.exports = class extends yeoman {
 
     _copyProjectItems() {
         mkdir.sync(this.settings.ProjectPath);
-        this.fs.copyTpl(this.templatePath('_project.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        if(this.settings.serialization)
+        {
+            this.fs.copyTpl(this.templatePath('_project.unicorn.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        }
+        else
+        {
+            this.fs.copyTpl(this.templatePath('_project.csproj'), this.destinationPath(path.join(this.settings.ProjectPath, this.settings.LayerPrefixedProjectName + '.csproj')), this.templatedata);
+        }
         this.fs.copyTpl(this.templatePath('Properties/AssemblyInfo.cs'), this.destinationPath(path.join(this.settings.ProjectPath, '/Properties/AssemblyInfo.cs')), this.templatedata);
         
-    }
+        //if we have publishsettings.targets, then copy in PublishProfiles/local.pubxml
+        fs.access(this.destinationPath('publishsettings.targets'), fs.constants.R_OK, (err) => {
+            if(err==null)
+            {
+                this.fs.copyTpl(this.templatePath('Properties/PublishProfiles/local.pubxml'), this.destinationPath(path.join(this.settings.ProjectPath, 'Properties/PublishProfiles/local.pubxml')), this.templatedata);
+            }
+        });
+   }
 
     _copySerializationItems() {
         mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
         var serializationDestinationFile = path.join(this.settings.ProjectPath, 'App_Config/Include', this.settings.LayerPrefixedProjectName, 'serialization.config');
         this.fs.copyTpl(this.templatePath('_serialization.config'), this.destinationPath(serializationDestinationFile), this.templatedata);
-    }
+     }
 
     writing() {
           this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'code' );
@@ -135,7 +147,9 @@ module.exports = class extends yeoman {
            const SolutionFile = files.find(file => file.indexOf('.sln') > -1)
            const scriptParameters = "-SolutionFile '" + this.destinationPath(SolutionFile) + "' -Name " + this.settings.LayerPrefixedProjectName + " -Type " + this.layer + " -ProjectPath '" + this.settings.ProjectPath + "'" + " -SolutionFolderName " + this.templatedata.projectname;
 
-           powershell.runAsync(path.join(this._sourceRoot, "../../powershell/add-project.ps1"), scriptParameters)
+           var pathToAddProjectScript = path.join(this._sourceRoot, "../../../powershell/add-project.ps1");
+           powershell.runAsync(pathToAddProjectScript, scriptParameters);
+
         }
 };
 

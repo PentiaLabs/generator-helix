@@ -9,7 +9,7 @@
     "@pentia/sitecore-package-manager": "0.1.9",
     "@pentia/configuration-transformer": "0.1.8",
     "@pentia/watch-publish-projects": "0.1.1",
-    "gulp": "3.9.5",
+    "gulp": "3.9.1",
     "run-sequence": "1.2.2"
   },
   "devDependencies": { },

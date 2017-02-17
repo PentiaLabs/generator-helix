@@ -9,13 +9,15 @@ Function Add-Line {
     [string[]]$LinesToAdd)
     
     $FileOriginal = Get-Content $FileName
+    $hasBeenAdded = $false
     [String[]] $FileModified = @() 
     Foreach ($Line in $FileOriginal)
     {   
         $FileModified += $Line
-        if ($Line.Trim() -eq $Pattern) 
+        if ($Line.Trim() -eq $Pattern -and !$hasBeenAdded) 
         { 
             $FileModified += $LinesToAdd   
+            $hasBeenAdded = $true;
         } 
     }
     Set-Content $fileName $FileModified -Force

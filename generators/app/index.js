@@ -47,15 +47,6 @@ module.exports = class extends yeoman {
                 default: this.appname
             },
             {
-                type: 'confirm',
-                name: 'serialization',
-                message: 'Would you like to enable serialization?'
-            },
-            {
-                type: 'confirm',
-                name: 'packagejson',
-                message: 'Would you like me to setup your package.json for you?'
-            },{
                 type:'input',
                 name:'sourceFolder',
                 message:'Source code folder name', 
@@ -69,7 +60,7 @@ module.exports = class extends yeoman {
         }.bind(this));
     }
 
-    askTargetFrameworkVersion() {
+         askTargetFrameworkVersion() {
         var questions = [{
         type: 'list',
         name: 'target',
@@ -90,7 +81,22 @@ module.exports = class extends yeoman {
         var done = this.async();
         this.prompt(questions).then(function(answers) {
             this.target = answers.target;
-            this._buildTemplateData();
+            done();
+        }.bind(this));
+    }
+
+
+    askSiteUrl() {
+        var questions = [{
+                type: 'input',
+                name: 'LocalWebsiteUrl',
+                message: 'Enter the local website URL',
+                default: 'http://'+ this.settings.SolutionName + ".local"
+            }];
+        var done = this.async();
+        this.prompt(questions).then(function(answers) {
+             this.localWebsiteUrl = answers.LocalWebsiteUrl;
+             this._buildTemplateData();
             done();
         }.bind(this));
     }
@@ -106,6 +112,7 @@ module.exports = class extends yeoman {
         this.templatedata.testguid = guid.v4();
         this.templatedata.sourceFolder = this.settings.sourceFolder;
         this.templatedata.target = this.target;
+        this.templatedata.localwebsiteurl = this.localWebsiteUrl;
     }
 
 
@@ -127,7 +134,7 @@ module.exports = class extends yeoman {
     _copySolutionItems() {
         mkdir.sync(path.join(this.settings.sourceFolder,"Project/Environment/Properties"));
 
-        this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath("gulpfile.js"));
+        this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath('gulpfile.js'));
 
         var environmentDestination = path.join(this.settings.sourceFolder,"Project/Environment");
 
@@ -136,6 +143,7 @@ module.exports = class extends yeoman {
         this.fs.copy(this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'), this.destinationPath(path.join(environmentDestination,'Properties/AssemblyInfo.cs')));
         this.fs.copyTpl(this.templatePath('_solution.sln'), this.destinationPath(this.settings.SolutionName + ".sln"), this.templatedata);
         this.fs.copyTpl(this.templatePath('_package.json'), this.destinationPath("package.json"), this.templatedata);
+        this.fs.copyTpl(this.templatePath('_publishsettings.targets'), this.destinationPath("publishsettings.targets"), this.templatedata);
         this.fs.copyTpl(this.templatePath('Project/Environment/Project.Environment.csproj'), this.destinationPath(path.join(environmentDestination,'Project.Environment.csproj')), this.templatedata);
     }
 
