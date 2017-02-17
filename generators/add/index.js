@@ -128,6 +128,15 @@ module.exports = class extends yeoman {
         });
    }
 
+   _copySolutionSpecificItems(){
+      fs.access(this.destinationPath('helix-template'), fs.constants.R_OK, (err) => {
+            if(err==null)
+            {
+                this.fs.copyTpl(this.destinationPath('helix-template/**/*'), this.destinationPath(this.settings.ProjectPath), this.templatedata);
+            }
+        }); 
+   }
+   
     _copySerializationItems() {
         mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
         var serializationDestinationFile = path.join(this.settings.ProjectPath, 'App_Config/Include', this.settings.LayerPrefixedProjectName, 'serialization.config');
@@ -137,6 +146,7 @@ module.exports = class extends yeoman {
     writing() {
           this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'code' );
           this._copyProjectItems() 
+          this._copySolutionSpecificItems()
 
            if(this.settings.serialization)
            {
