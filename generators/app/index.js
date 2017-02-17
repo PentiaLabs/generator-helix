@@ -131,7 +131,11 @@ module.exports = class extends yeoman {
             }
     }
 
-    _copySolutionItems() {
+    _copyEmptySolutionItems(){
+        this.fs.copyTpl(this.templatePath('_emptySolution.sln'), this.destinationPath(this.settings.SolutionName + ".sln"), this.templatedata);
+    }
+
+    _copyPentiaSolutionItems() {
         mkdir.sync(path.join(this.settings.sourceFolder,"Project/Environment/Properties"));
 
         this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath('gulpfile.js'));
@@ -152,11 +156,11 @@ module.exports = class extends yeoman {
             switch(this.type)
             {
                 case 'emptyhelix':
-
+                    this._copyEmptySolutionItems()
                 break;
 
                 case 'pentiahelix':
-                    this._copySolutionItems() 
+                    this._copyPentiaSolutionItems() 
                 break;
             }
         }
