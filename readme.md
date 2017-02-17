@@ -1,6 +1,12 @@
 # Helix Generator
+[![npm version](https://img.shields.io/npm/v/generator-helix.svg?style=flat-square)](http://npmjs.org/generator-helix)
+[![npm downloads](https://img.shields.io/npm/dm/generator-helix.svg?style=flat-square)](http://npmjs.org/generator-helix)
+[![Build Status](https://img.shields.io/appveyor/ci/Saturate/generator-helix.svg?style=flat-square)](https://ci.appveyor.com/project/Saturate/generator-helix)
+[![Dependency Status](https://img.shields.io/david/PentiaLabs/generator-helix.svg?style=flat-square)](https://david-dm.org/PentiaLabs/generator-helix)
+[![License](https://img.shields.io/npm/l/generator-helix.svg?style=flat-square)](https://github.com/PentiaLabs/generator-helix//blob/master/LICENSE)
 
-This generator will create a Helix compliant solution and provide the ability to create & add new projects to any layer (i.e. Feature, Foundation & Project). Unicorn is used for serialization, if you don't use serialization and or TDS you have the option not to add serialization to the project. 
+
+This generator will create a Helix compliant solution and provide the ability to create & add new projects to any layer (i.e. Feature, Foundation & Project). Unicorn is used for serialization, if you don't use serialization and or TDS you have the option not to add serialization to the project.
 
 ## Prerequisites:
 NPM 3.x or newer(see installed version by running "npm -v" in PowerShell)
@@ -48,4 +54,4 @@ Thank you, and happy contributing!
 
 To get around this issues execute the following command in a command line prompt, such as PowerShell with administrator rights:
 
-> Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force 
+> Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force

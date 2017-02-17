@@ -20,21 +20,22 @@ module.exports = class extends yeoman {
     askForSolutionType() {
         var questions = [{
         type: 'list',
-        name: 'type',
+			name: 'SolutionType',
         message: 'What type of solution do you want to create?',
-        choices: [
-            {
+			choices: [{
             name: 'Empty Helix solution',
             value: 'emptyhelix'
-            }, {
+			},{
             name: 'Helix solution with Pentia tools',
             value: 'pentiahelix'
             }]
         }];
 
         var done = this.async();
+
         this.prompt(questions).then(function(answers) {
-            this.type = answers.type;
+			this.type = answers.SolutionType;
+			this.includeWCT = answers.includeWCT;
             done();
         }.bind(this));
     }
@@ -56,6 +57,8 @@ module.exports = class extends yeoman {
         var done = this.async();
         this.prompt(questions).then(function(answers) {
             this.settings = answers;
+			this.sourceFolder = answers.sourceFolder;
+			this.SolutionName = answers.SolutionName;
             done();
         }.bind(this));
     }
@@ -91,7 +94,7 @@ module.exports = class extends yeoman {
                 type: 'input',
                 name: 'LocalWebsiteUrl',
                 message: 'Enter the local website URL',
-                default: 'http://'+ this.settings.SolutionName + ".local"
+			default: 'http://'+ this.settings.SolutionName + '.local'
             }];
         var done = this.async();
         this.prompt(questions).then(function(answers) {
@@ -140,15 +143,38 @@ module.exports = class extends yeoman {
 
         this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath('gulpfile.js'));
 
-        var environmentDestination = path.join(this.settings.sourceFolder,"Project/Environment");
+		var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment');
 
-        this.fs.copy(this.templatePath('Project/Environment/web.config'), this.destinationPath(path.join(environmentDestination,'web.config')));
-        this.fs.copy(this.templatePath('Project/Environment/packages.config'), this.destinationPath(path.join(environmentDestination,'packages.config')));
-        this.fs.copy(this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'), this.destinationPath(path.join(environmentDestination,'Properties/AssemblyInfo.cs')));
-        this.fs.copyTpl(this.templatePath('_solution.sln'), this.destinationPath(this.settings.SolutionName + ".sln"), this.templatedata);
-        this.fs.copyTpl(this.templatePath('_package.json'), this.destinationPath("package.json"), this.templatedata);
-        this.fs.copyTpl(this.templatePath('_publishsettings.targets'), this.destinationPath("publishsettings.targets"), this.templatedata);
-        this.fs.copyTpl(this.templatePath('Project/Environment/Project.Environment.csproj'), this.destinationPath(path.join(environmentDestination,'Project.Environment.csproj')), this.templatedata);
+		this.fs.copy(
+			this.templatePath('Project/Environment/web.config'),
+			this.destinationPath(path.join(environmentDestination, 'web.config'))
+		);
+
+		this.fs.copy(
+			this.templatePath('Project/Environment/packages.config'),
+			this.destinationPath(path.join(environmentDestination,'packages.config'))
+		);
+		this.fs.copy(
+			this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'),
+			this.destinationPath(path.join(environmentDestination,'Properties/AssemblyInfo.cs'))
+		);
+		this.fs.copyTpl(
+			this.templatePath('_solution.sln'),
+			this.destinationPath(this.settings.SolutionName + '.sln'),
+			this.templatedata
+		);
+		this.fs.copyTpl(
+			this.templatePath('_package.json'),
+			this.destinationPath('package.json'), this.templatedata
+		);
+		this.fs.copyTpl(
+			this.templatePath('_publishsettings.targets'),
+			this.destinationPath('publishsettings.targets'), this.templatedata
+		);
+		this.fs.copyTpl(
+			this.templatePath('Project/Environment/Project.Environment.csproj'),
+			this.destinationPath(path.join(environmentDestination,'Project.Environment.csproj')), this.templatedata
+		);
     }
 
     writing() {
@@ -160,9 +186,8 @@ module.exports = class extends yeoman {
                 break;
 
                 case 'pentiahelix':
-                    this._copyPentiaSolutionItems() 
+                    this._copyPentiaSolutionItems()
                 break;
             }
         }
 };
-
