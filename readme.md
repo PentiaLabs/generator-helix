@@ -1,7 +1,7 @@
 # Helix Generator
 [![npm version](https://img.shields.io/npm/v/generator-helix.svg?style=flat-square)](http://npmjs.org/generator-helix)
 [![npm downloads](https://img.shields.io/npm/dm/generator-helix.svg?style=flat-square)](http://npmjs.org/generator-helix)
-[![Build Status](https://img.shields.io/travis/PentiaLabs/generator-helix/master.svg?style=flat-square)](https://travis-ci.org/yeoman/generator-helix)
+[![Build Status](https://img.shields.io/appveyor/ci/Saturate/generator-helix.svg?style=flat-square)](https://ci.appveyor.com/project/Saturate/generator-helix)
 [![Dependency Status](https://img.shields.io/david/PentiaLabs/generator-helix.svg?style=flat-square)](https://david-dm.org/PentiaLabs/generator-helix)
 [![License](https://img.shields.io/npm/l/generator-helix.svg?style=flat-square)](https://github.com/PentiaLabs/generator-helix//blob/master/LICENSE)
 
