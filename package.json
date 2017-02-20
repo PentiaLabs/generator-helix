@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/PentiaLabs/generator-helix#readme",
   "author": "Emil Klein <eok@pentia.dk>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.3",
     "mkdirp": "0.5.1",
