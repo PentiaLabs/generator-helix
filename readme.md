@@ -38,6 +38,24 @@ You can call with the Project Name, if you do not you will be prompted to enter 
 
 > yo helix:add [ProjectName]
 
+### Extending the add generator
+
+To extend the add generator create a folder in solution root called helix-template.
+All files in the folder are copied to the project folder using the copyTpl function in yeoman.
+This means that if you need to inject the data from the generator to your files you can use the variables like this.
+
+> <%= layerprefixedprojectname %> 
+
+**Variables**
+* layerprefixedprojectname 
+* projectname
+* projectguid
+* layer
+* target
+
+The one special case is that if you have a file called _project.csproj in the folder it will copy it and then rename it to the correct Project name.
+This way you can create your own project file that matches your specific needs.
+
 ## Contributing
 
 We love it if you would contribute! **Please read our [contributing guide](CONTRIBUTING.md) if you're looking to help us out.**
