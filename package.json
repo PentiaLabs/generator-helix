@@ -41,7 +41,7 @@
   },
   "files": [
     "generators",
-    "Modules",
-    "Powershell"
+    "modules",
+    "powershell"
   ]
 }
