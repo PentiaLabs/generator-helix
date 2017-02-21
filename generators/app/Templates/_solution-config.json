@@ -1,0 +1,19 @@
+{
+    "configurationTransform": {
+      "AlwaysApplyName": "always"
+    },
+    "msbuild": {
+      "showError": false,
+      "showStandardOutput": false,
+      "toolsversion": 14.0,
+      "verbosity": "minimal"
+    },
+    "configs": [
+      {
+        "name": "debug",
+        "rootFolder": "C:\\websites\\boilerplate.local",
+        "websiteRoot" :"C:\\websites\\boilerplate.local\\Website",
+        "websiteDataRoot" :"C:\\websites\\boilerplate.local\\Website\\Data"
+      }
+    ]
+}

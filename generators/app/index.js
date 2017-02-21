@@ -138,43 +138,33 @@ module.exports = class extends yeoman {
         this.fs.copyTpl(this.templatePath('_emptySolution.sln'), this.destinationPath(this.settings.SolutionName + ".sln"), this.templatedata);
     }
 
+    _copyTemplateFile(template, destination)
+    {
+		this.fs.copyTpl(
+			this.templatePath(template),
+			this.destinationPath(destination),
+            this.templatedata
+		);
+    }
+
+    _copyToEnvironmentProject(template, destination){
+        var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment');
+        this._copyTemplateFile('Project/Environment/web.config',path.join(environmentDestination, destination));
+    }
+
     _copyPentiaSolutionItems() {
         mkdir.sync(path.join(this.settings.sourceFolder,"Project/Environment/Properties"));
 
-        this.fs.copy(this.templatePath('_gulpfile.js'), this.destinationPath('gulpfile.js'));
+        this._copyToEnvironmentProject('Project/Environment/web.config', 'web.config');
+        this._copyToEnvironmentProject('Project/Environment/packages.config', 'packages.config');
+        this._copyToEnvironmentProject('Project/Environment/Properties/AssemblyInfo.cs','Properties/AssemblyInfo.cs');
+        this._copyToEnvironmentProject('Project/Environment/Project.Environment.csproj','Project.Environment.csproj');
 
-		var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment');
-
-		this.fs.copy(
-			this.templatePath('Project/Environment/web.config'),
-			this.destinationPath(path.join(environmentDestination, 'web.config'))
-		);
-
-		this.fs.copy(
-			this.templatePath('Project/Environment/packages.config'),
-			this.destinationPath(path.join(environmentDestination,'packages.config'))
-		);
-		this.fs.copy(
-			this.templatePath('Project/Environment/Properties/AssemblyInfo.cs'),
-			this.destinationPath(path.join(environmentDestination,'Properties/AssemblyInfo.cs'))
-		);
-		this.fs.copyTpl(
-			this.templatePath('_solution.sln'),
-			this.destinationPath(this.settings.SolutionName + '.sln'),
-			this.templatedata
-		);
-		this.fs.copyTpl(
-			this.templatePath('_package.json'),
-			this.destinationPath('package.json'), this.templatedata
-		);
-		this.fs.copyTpl(
-			this.templatePath('_publishsettings.targets'),
-			this.destinationPath('publishsettings.targets'), this.templatedata
-		);
-		this.fs.copyTpl(
-			this.templatePath('Project/Environment/Project.Environment.csproj'),
-			this.destinationPath(path.join(environmentDestination,'Project.Environment.csproj')), this.templatedata
-		);
+        this._copyTemplateFile('_gulpfile.js', 'gulpfile.js');
+        this._copyTemplateFile('_solution.sln', this.settings.SolutionName + '.sln');
+        this._copyTemplateFile('_package.json','package.json');
+        this._copyTemplateFile('_publishsettings.targets', 'publishsettings.targets');
+        this._copyTemplateFile('_solution-config.json', 'solution-config.json');
     }
 
     writing() {
