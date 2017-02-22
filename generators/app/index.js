@@ -63,23 +63,23 @@ module.exports = class extends yeoman {
         }.bind(this));
     }
 
-         askTargetFrameworkVersion() {
+    askTargetFrameworkVersion() {
         var questions = [{
-        type: 'list',
-        name: 'target',
-        message: 'Choose target .net framework version?',
-        choices: [
-            {
-            name: '.net 4.6.1',
-            value: 'v4.6.1'
-            }, {
-            name: '.net 4.6',
-            value: 'v4.6'
-            }, {
-            name: '.net 4.5.2',
-            value: 'v4.5.2'
-            }]
-        }];
+            type: 'list',
+            name: 'target',
+            message: 'Choose target .net framework version?',
+            choices: [
+                {
+                name: '.net 4.6.1',
+                value: 'v4.6.1'
+                }, {
+                name: '.net 4.6',
+                value: 'v4.6'
+                }, {
+                name: '.net 4.5.2',
+                value: 'v4.5.2'
+                }]
+            }];
 
         var done = this.async();
         this.prompt(questions).then(function(answers) {
@@ -115,6 +115,7 @@ module.exports = class extends yeoman {
         this.templatedata.testguid = guid.v4();
         this.templatedata.sourceFolder = this.settings.sourceFolder;
         this.templatedata.target = this.target;
+        this.templatedata.targetnoprefix = this.target.replace('v','');
         this.templatedata.localwebsiteurl = this.localWebsiteUrl;
     }
 
@@ -149,7 +150,7 @@ module.exports = class extends yeoman {
 
     _copyToEnvironmentProject(template, destination){
         var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment');
-        this._copyTemplateFile('Project/Environment/web.config',path.join(environmentDestination, destination));
+        this._copyTemplateFile(template,path.join(environmentDestination, destination));
     }
 
     _copyPentiaSolutionItems() {

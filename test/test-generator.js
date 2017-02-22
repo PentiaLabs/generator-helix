@@ -16,7 +16,8 @@ describe('yo helix:app (pentiahelix)', function () {
 		helpers.run(path.join(__dirname, '../generators/app'))
 			.withPrompts({
 				SolutionType: 'pentiahelix',
-				SolutionName: 'UnitTest'
+				SolutionName: 'UnitTest',
+				target: 'v4.6.1'
 			}).then(() => {
 				assert.file([
 					'package.json',
