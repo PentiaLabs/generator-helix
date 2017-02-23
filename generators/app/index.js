@@ -29,13 +29,21 @@ module.exports = class extends yeoman {
 				name: 'Helix solution with Pentia tools',
 				value: 'pentiahelix'
 			}]
+		}, {
+			type: 'confirm',
+			name: 'installDeps',
+			message: 'Would you like to auto-install Pentia tools?',
+			default: true,
+			when: function(answers) {
+				return answers.SolutionType === 'pentiahelix';
+			}
 		}];
 
 		var done = this.async();
 
 		this.prompt(questions).then(function(answers) {
 			this.type = answers.SolutionType;
-			this.includeWCT = answers.includeWCT;
+			this.installDeps = answers.installDeps;
 			done();
 		}.bind(this));
 	}
@@ -180,7 +188,7 @@ module.exports = class extends yeoman {
 	}
 
 	installDependencies() {
-		if (this.type === 'pentiahelix') {
+		if (this.type === 'pentiahelix' && this.installDeps) {
 			this.npmInstall();
 		}
 	}
