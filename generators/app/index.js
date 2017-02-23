@@ -178,4 +178,10 @@ module.exports = class extends yeoman {
 			break;
 		}
 	}
+
+	installDependencies() {
+		if (this.type === 'pentiahelix') {
+			this.npmInstall();
+		}
+	}
 };
