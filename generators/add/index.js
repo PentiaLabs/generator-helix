@@ -104,6 +104,7 @@ module.exports = class extends yeoman {
 		this.templatedata.projectname = this.settings.ProjectName;
 		this.templatedata.projectguid = guid.v4();
 		this.templatedata.layer = this.layer;
+		this.templatedata.lowercasedlayer = this.layer.toLowerCase();;
 		this.templatedata.target = this.target;
 	}
 
