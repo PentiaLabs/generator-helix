@@ -58,7 +58,12 @@ describe('yo helix:add', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj'
+					'./src/Feature/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj',
+					'./src/Feature/AddedProjectFeatureName/code/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config'
+				]);
+
+				assert.fileContent([
+					['./src/Feature/AddedProjectFeatureName/code/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config', /physicalRootPath="\$\(featureFolder\)\\AddedProjectFeatureName\\\$\(configurationFolder\)"/]
 				]);
 
 				done();
