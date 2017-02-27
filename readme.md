@@ -36,7 +36,7 @@ To create a Helix solution run the following command in an empty root folder whe
 To add a new project to an existing run the following command in the root directory, that contains the VS solution file.
 You can call with the Project Name, if you do not you will be prompted to enter it.
 
-> yo helix:add [ProjectName]
+> yo helix:add [ProjectName] [VendorPrefix]
 
 ### Extending the add generator
 
@@ -52,6 +52,7 @@ This means that if you need to inject the data from the generator to your files 
 * projectguid
 * layer
 * target
+* vendorprefix
 
 The one special case is that if you have a file called _project.csproj in the folder it will copy it and then rename it to the correct Project name.
 This way you can create your own project file that matches your specific needs.

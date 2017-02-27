@@ -11,6 +11,7 @@ module.exports = class extends yeoman {
 	constructor(args, opts) {
 		super(args, opts);
 		this.argument('ProjectName', { type: String, required: false, desc: 'Name of the project' });
+		this.argument('VendorPrefix', { type: String, required: false, desc: 'Vendor prefix used in the creation of project structure' });
 	}
 
 	init() {
@@ -37,7 +38,14 @@ module.exports = class extends yeoman {
 			name:'sourceFolder',
 			message:'Source code folder name',
 			default: 'src'
-		}];
+		},
+		{
+			type:'input',
+			name:'VendorPrefix',
+			message:'Enter optional vendor prefix',
+			default: this.options.VendorPrefix
+		}
+		];
 
 		this.prompt(questions).then((answers) => {
 			this.settings = answers;
@@ -66,7 +74,13 @@ module.exports = class extends yeoman {
 
 		this.prompt(questions).then((answers) => {
 			this.layer = answers.layer;
-			this.settings.LayerPrefixedProjectName = this.layer + '.' + this.settings.ProjectName;
+
+			if (this.settings.VendorPrefix === '' || this.settings.VendorPrefix === undefined ) {
+				this.settings.LayerPrefixedProjectName = `${this.layer}.${this.settings.ProjectName}`
+			} else {
+				this.settings.LayerPrefixedProjectName = `${this.settings.VendorPrefix}.${this.layer}.${this.settings.ProjectName}`
+			}
+
 			done();
 		});
 	}
@@ -100,6 +114,7 @@ module.exports = class extends yeoman {
 	_buildTemplateData() {
 		this.templatedata.layerprefixedprojectname = this.settings.LayerPrefixedProjectName;
 		this.templatedata.projectname = this.settings.ProjectName;
+		this.templatedata.vendorprefix = this.settings.VendorPrefix;
 		this.templatedata.projectguid = guid.v4();
 		this.templatedata.layer = this.layer;
 		this.templatedata.lowercasedlayer = this.layer.toLowerCase();;
