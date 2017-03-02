@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{<%
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{<%= environmentfolderguid %>}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environment", "<%= sourceFolder %>\Project\Environment\Project.Environment.csproj", "{<%= environmentguid %>}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environment", "<%= sourceFolder %>\Project\Environment\code\Project.Environment.csproj", "{<%= environmentguid %>}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
