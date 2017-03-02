@@ -119,7 +119,6 @@ module.exports = class extends yeoman {
 		this.templatedata.projectguid = guid.v4();
 		this.templatedata.featureguid = guid.v4();
 		this.templatedata.foundationguid = guid.v4();
-		this.templatedata.testguid = guid.v4();
 		this.templatedata.sourceFolder = this.settings.sourceFolder;
 		this.templatedata.target = this.target;
 		this.templatedata.targetnoprefix = this.target.replace('v', '');
@@ -154,12 +153,12 @@ module.exports = class extends yeoman {
 	}
 
 	_copyToEnvironmentProject(template, destination) {
-		var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment');
+		var environmentDestination = path.join(this.settings.sourceFolder, 'Project/Environment/code');
 		this._copyTemplateFile(template,path.join(environmentDestination, destination));
 	}
 
 	_copyPentiaSolutionItems() {
-		mkdir.sync(path.join(this.settings.sourceFolder, 'Project/Environment/Properties'));
+		mkdir.sync(path.join(this.settings.sourceFolder, 'Project/Environment/code/Properties'));
 
 		this._copyToEnvironmentProject('Project/Environment/web.config', 'web.config');
 		this._copyToEnvironmentProject('Project/Environment/packages.config', 'packages.config');
