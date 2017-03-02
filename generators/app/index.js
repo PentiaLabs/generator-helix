@@ -119,7 +119,6 @@ module.exports = class extends yeoman {
 		this.templatedata.projectguid = guid.v4();
 		this.templatedata.featureguid = guid.v4();
 		this.templatedata.foundationguid = guid.v4();
-		this.templatedata.testguid = guid.v4();
 		this.templatedata.sourceFolder = this.settings.sourceFolder;
 		this.templatedata.target = this.target;
 		this.templatedata.targetnoprefix = this.target.replace('v', '');
