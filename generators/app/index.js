@@ -33,7 +33,7 @@ module.exports = class extends yeoman {
 			type: 'confirm',
 			name: 'installDeps',
 			message: 'Would you like to auto-install Pentia tools?',
-			default: true,
+			default: false,
 			when: function(answers) {
 				return answers.SolutionType === 'pentiahelix';
 			}
@@ -163,6 +163,7 @@ module.exports = class extends yeoman {
 		this._copyToEnvironmentProject('Project/Environment/web.config', 'web.config');
 		this._copyToEnvironmentProject('Project/Environment/packages.config', 'packages.config');
 		this._copyToEnvironmentProject('Project/Environment/Properties/AssemblyInfo.cs', 'Properties/AssemblyInfo.cs');
+		this._copyToEnvironmentProject('Project/Environment/Properties/PublishProfiles/local.pubxml', 'Properties/PublishProfiles/local.pubxml');
 		this._copyToEnvironmentProject('Project/Environment/Project.Environment.csproj', 'Project.Environment.csproj');
 
 		this._copyTemplateFile('_gulpfile.js', 'gulpfile.js');
