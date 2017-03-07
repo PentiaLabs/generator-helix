@@ -125,6 +125,5 @@ describe('yo helix:add', function () {
 
 				done();
 			});
-
 	});
 });
