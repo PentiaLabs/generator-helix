@@ -4,7 +4,7 @@
   "description": "yeoman generator for Helix style Sitecore projects",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && eslint ."
   },
   "keywords": [
     "yeoman-generator",
@@ -34,6 +34,7 @@
     "yosay": "1.2.1"
   },
   "devDependencies": {
+    "eslint": "^3.17.1",
     "mocha": "*",
     "object-assign": "^4.1.0",
     "yeoman-assert": "^2.2.1",
