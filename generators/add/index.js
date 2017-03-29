@@ -40,13 +40,15 @@ module.exports = class extends yeoman {
 			type:'input',
 			name:'sourceFolder',
 			message:'Source code folder name',
-			default: 'src'
+			default: 'src',
+			store: true
 		},
 		{
 			type:'input',
 			name:'VendorPrefix',
 			message:'Enter optional vendor prefix',
-			default: this.options.VendorPrefix
+			default: this.options.VendorPrefix,
+			store: true
 		}
 		];
 
