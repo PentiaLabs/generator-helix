@@ -59,7 +59,8 @@ module.exports = class extends yeoman {
 			type:'input',
 			name:'sourceFolder',
 			message:'Source code folder name', 
-			default: 'src'
+			default: 'src',
+			store: true
 		}];
 
 		var done = this.async();
@@ -86,7 +87,8 @@ module.exports = class extends yeoman {
 				}, {
 					name: '.net 4.5.2',
 					value: 'v4.5.2'
-				}]
+				}],
+			store: true
 		}];
 
 		var done = this.async();
