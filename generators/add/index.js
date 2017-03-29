@@ -27,9 +27,7 @@ module.exports = class extends yeoman {
 			name: 'ProjectName',
 			message: 'Name of your project.' + chalk.blue(' (Excluding layer prefix, name can not be empty)'),
 			default: this.options.ProjectName,
-			validate: function(input){
-				return input.length>0;
-			}
+			validate: util.validateProjectName
 		},
 		{
 			type: 'confirm',
