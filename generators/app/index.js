@@ -3,6 +3,7 @@ var mkdir = require('mkdirp');
 var yosay = require('yosay');
 var guid = require('uuid');
 var path = require('path');
+const util = require('./utility');
 
 module.exports = class extends yeoman {
 
@@ -77,17 +78,7 @@ module.exports = class extends yeoman {
 			type: 'list',
 			name: 'target',
 			message: 'Choose target .net framework version?',
-			choices: [
-				{
-					name: '.net 4.6.1',
-					value: 'v4.6.1'
-				}, {
-					name: '.net 4.6',
-					value: 'v4.6'
-				}, {
-					name: '.net 4.5.2',
-					value: 'v4.5.2'
-				}],
+			choices: util.getTargets,
 			store: true
 		}];
 

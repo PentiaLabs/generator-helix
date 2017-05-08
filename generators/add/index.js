@@ -6,6 +6,7 @@ const powershell = require('../../modules/powershell');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
+const util = require('../app/utility');
 
 module.exports = class extends yeoman {
 	constructor(args, opts) {
@@ -26,9 +27,7 @@ module.exports = class extends yeoman {
 			name: 'ProjectName',
 			message: 'Name of your project.' + chalk.blue(' (Excluding layer prefix, name can not be empty)'),
 			default: this.options.ProjectName,
-			validate: function(input){
-				return input.length>0;
-			}
+			validate: util.validateProjectName
 		},
 		{
 			type: 'confirm',
@@ -112,17 +111,8 @@ module.exports = class extends yeoman {
 			type: 'list',
 			name: 'target',
 			message: 'Choose target .net framework version?',
-			choices: [
-				{
-					name: '.net 4.6.1',
-					value: 'v4.6.1'
-				}, {
-					name: '.net 4.6',
-					value: 'v4.6'
-				}, {
-					name: '.net 4.5.2',
-					value: 'v4.5.2'
-				}]
+			choices: util.getTargets,
+			store: true
 		}];
 
 		this.prompt(questions).then((answers) => {
