@@ -47,7 +47,7 @@ module.exports = class extends yeoman {
 			name:'VendorPrefix',
 			message:'Enter optional vendor prefix',
 			default: this.options.VendorPrefix,
-			store: true
+			store: false
 		}
 		];
 
