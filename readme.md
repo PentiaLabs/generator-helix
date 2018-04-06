@@ -10,12 +10,10 @@ This generator will create a Helix compliant solution and provide the ability to
 
 ## Prerequisites:
 
-VS 2015 or earlier.
+- **VS 2015 or earlier**   
 If you want to run the generator with only Visual Studio 2017 installed, you need the [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159) as well. For more information see issue #109 and #107
-
-NPM 3.x or newer(see installed version by running "npm -v" in PowerShell)
-
-NODE 6.x or newer (see installed version by running "node -v" in PowerShell)
+- **NPM 3.x or newer** (see installed version by running `npm -v` in PowerShell)
+- **NODE 6.x or newer** (see installed version by running `node -v` in PowerShell)
 
 ## Getting started
 
