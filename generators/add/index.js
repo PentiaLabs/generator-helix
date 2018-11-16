@@ -223,7 +223,7 @@ module.exports = class extends yeoman {
 		}
 
 		const files = fs.readdirSync(this.destinationPath());
-		const SolutionFile = files.find(file => file.indexOf('.sln') > -1);
+		const SolutionFile = files.find(file => file.toUpperCase().endsWith(".SLN"));
 		const scriptParameters = '-SolutionFile \'' + this.destinationPath(SolutionFile) + '\' -Name ' + this.settings.LayerPrefixedProjectName + ' -Type ' + this.layer + ' -ProjectPath \'' + this.settings.ProjectPath + '\'' + ' -SolutionFolderName ' + this.templatedata.projectname;
 
 		var pathToAddProjectScript = path.join(this._sourceRoot, '../../../powershell/add-project.ps1');
