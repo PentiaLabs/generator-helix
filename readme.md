@@ -40,23 +40,39 @@ You can call with the Project Name, if you do not you will be prompted to enter 
 
 > yo helix:add [ProjectName] [VendorPrefix]
 
-### Extending the add generator
+### Modifying the add project generator
 
-To extend the add generator create a folder in solution root called helix-template.
-All files in the folder are copied to the project folder using the copyTpl function in yeoman.
-This means that if you need to inject the data from the generator to your files you can use the variables like this.
+By default, the **Template** folder for the add generator is at the following path:
 
-> <%= layerprefixedprojectname %> 
+`C:\Users\[username]\AppData\Roaming\npm\node_modules\generator-helix\generators\add\Templates`
 
-**Variables**
-* layerprefixedprojectname 
-* projectname
-* projectguid
-* layer
-* target
-* vendorprefix
+The **Template** folder contains all the files and folders that are copied to the project folder that is created.
 
-The one special case is that if you have a file called _project.csproj in the folder it will copy it and then rename it to the correct Project name.
+It is possible to define a solution specific **Template** folder so it is possible to achieve the following:
+
+* Add/Remove files
+* Add/Remove folders 
+* Modify file contents
+
+To override the default folder, add a folder called **helix-template** to the **solution root**. 
+
+Then all files will be copied from the solution specific **helix-template** folder instead of the default folder using the `copyTpl` function in yeoman.
+
+You can inject all the variables that the generator defines into your files using the syntax below for example.
+
+`<%= layerprefixedprojectname %>`
+
+**List of Variables**
+* `layerprefixedprojectname`
+* `projectname`
+* `projectguid`
+* `layer`
+* `target`
+* `vendorprefix`
+
+***Note***
+
+The one special case is that if you have a file called `_project.csproj` in the folder, it will be copied and then renamed to the correct Project name.
 This way you can create your own project file that matches your specific needs.
 
 ## Contributing
@@ -84,6 +100,8 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 For more information on SemVer, please visit http://semver.org/
+
+To create a new version please follow the [Release Process](Release.md).
 
 ## Troubleshooting
 
