@@ -40,21 +40,29 @@ You can call with the Project Name, if you do not you will be prompted to enter 
 
 > yo helix:add [ProjectName] [VendorPrefix]
 
-### Modifying the add project generator
+## Modifying the add project generator
+
+### Global Template folder
+
+The **Template** folder contains all the files and folders that are copied to the project folder that is created.
 
 By default, the **Template** folder for the add generator is at the following path:
 
 `C:\Users\[username]\AppData\Roaming\npm\node_modules\generator-helix\generators\add\Templates`
 
-The **Template** folder contains all the files and folders that are copied to the project folder that is created.
+You can modify any file in this folder to meet your specific requirements, but it will affect **ALL** projects.
 
-It is possible to define a solution specific **Template** folder so it is possible to achieve the following:
+### Solution Specific Temaplte
+
+What if you **don't** want to change the template for **ALL** sitecore solutions, but only for a specifc sitecore solution for example you want to do the following
 
 * Add/Remove files
 * Add/Remove folders 
 * Modify file contents
 
-To override the default folder, add a folder called **helix-template** to the **solution root**. 
+It is possible to define a solution specific **Solution Template** folder.
+
+To override the default **Template** folder - add a folder called **helix-template** to the **solution root**. 
 
 Then all files will be copied from the solution specific **helix-template** folder instead of the default folder using the `copyTpl` function in yeoman.
 
