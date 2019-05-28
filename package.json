@@ -1,6 +1,6 @@
 {
   "name": "generator-helix",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "description": "yeoman generator for Helix style Sitecore projects",
   "main": "index.js",
   "scripts": {
