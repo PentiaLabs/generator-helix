@@ -200,13 +200,19 @@ module.exports = class extends yeoman {
 	}
 
 	_copySerializationItems() {
-		mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
+		if(this.modulegroup){
+			mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.modulegroup, this.settings.ProjectName, 'serialization' ));
+		}
+		else{
+			mkdir.sync(path.join(this.settings.sourceFolder, this.layer, this.settings.ProjectName, 'serialization' ));
+		}
 		const serializationDestinationFile = path.join(
 			this.settings.ProjectPath,
 			'App_Config/Include',
 			this.settings.LayerPrefixedProjectName,
 			'serialization.config'
 		);
+
 		this.fs.copyTpl(this.templatePath('_serialization.config'), this.destinationPath(serializationDestinationFile), this.templatedata);
 	}
 
