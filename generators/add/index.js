@@ -130,6 +130,7 @@ module.exports = class extends yeoman {
 		this.templatedata.layer = this.layer;
 		this.templatedata.lowercasedlayer = this.layer.toLowerCase();
 		this.templatedata.target = this.target;
+		this.templatedata.modulegroup = this.modulegroup;
 	}
 
 	_copyProjectItems() {
