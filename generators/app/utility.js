@@ -2,6 +2,15 @@ const chalk = require('chalk');
 
 function getTargets() {
 return [{
+	name: '.net 4.8',
+	value: 'v4.8'
+}, {
+	name: '.net 4.7.2',
+	value: 'v4.7.2'
+}, {
+	name: '.net 4.7.1',
+	value: 'v4.7.1'
+}, {
 	name: '.net 4.7',
 	value: 'v4.7'
 }, {
