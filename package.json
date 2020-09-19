@@ -1,7 +1,7 @@
 {
   "name": "generator-helix",
   "version": "1.6.0",
-  "description": "yeoman generator for Helix style Sitecore projects",
+  "description": "yeoman generator for Helix style Sitecore projects ",
   "main": "index.js",
   "scripts": {
     "test": "mocha && eslint ."
